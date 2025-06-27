@@ -34,20 +34,33 @@ const prompt = ai.definePrompt({
   name: 'generateSectionContentPrompt',
   input: {schema: GenerateSectionContentInputSchema},
   output: {schema: GenerateSectionContentOutputSchema},
-  prompt: `Eres un experto redactor técnico que crea archivos README excepcionales.
-Basado en los siguientes detalles del proyecto, escribe el contenido para la sección "**{{{sectionName}}}**" de un archivo README.
-La salida debe estar en formato markdown y ser directamente usable.
-No incluyas el título de la sección (ej. '## {{{sectionName}}}') en tu respuesta, solo el contenido.
+  prompt: `Eres un experto redactor técnico y desarrollador de software que crea archivos README excepcionales. Tu tarea es generar contenido detallado y útil en formato markdown para la sección específica de un README.
 
-Detalles del Proyecto:
-- Nombre: {{{projectName}}}
-- Descripción: {{{projectDescription}}}
-- Tipo: {{{projectType}}}
-- Características Clave: {{{features}}}
-- Tecnologías Usadas: {{{technologies}}}
+**Sección a generar:** '{{{sectionName}}}'
 
-Por ejemplo, si la sección es "Instalación", proporciona los comandos de clonación y de instalación de dependencias. Si es "Uso", proporciona un ejemplo de cómo ejecutar el proyecto. Si es "Características", elabora sobre las características listadas.
-Sé claro, conciso y útil.
+**Detalles del Proyecto:**
+- **Nombre:** {{{projectName}}}
+- **Descripción:** {{{projectDescription}}}
+- **Tipo:** {{{projectType}}}
+- **Características Clave:** {{{features}}}
+- **Tecnologías Usadas:** {{{technologies}}}
+
+**Instrucciones Específicas:**
+1.  **NO incluyas el título de la sección** en tu respuesta (ej., no escribas \`## {{{sectionName}}}\`). Solo genera el contenido.
+2.  **Adapta el contenido** al nombre de la sección (\`sectionName\`). Sé muy específico y detallado.
+3.  Utiliza formato **Markdown** de alta calidad, incluyendo bloques de código con lenguaje especificado (ej., \`\`\`bash \`\`\`), listas, negritas, etc., cuando sea apropiado.
+4.  **Expande la información proporcionada.** No te limites a repetir los detalles del proyecto. Elabóralos.
+
+**Guía de Contenido por Sección:**
+-   Si la sección es **Introducción**: Expande la descripción del proyecto. Explica el problema que resuelve y para quién es útil.
+-   Si la sección es **Características**: Toma la lista de características clave (\`{{{features}}}\`) y describe cada una con más detalle en una lista de viñetas.
+-   Si la sección es **Tecnologías**: Lista las tecnologías (\`{{{technologies}}}\`) utilizadas y, si es posible, menciona brevemente por qué se eligieron.
+-   Si la sección es **Instalación**: Proporciona una guía paso a paso con bloques de código claros. Incluye prerrequisitos, clonación del repositorio (\`git clone ...\`), instalación de dependencias (ej., \`npm install\`), y configuración de variables de entorno si aplica.
+-   Si la sección es **Uso**: Explica cómo ejecutar el proyecto. Proporciona comandos (\`npm run dev\`) y ejemplos de uso. Si es una API, muestra ejemplos de endpoints.
+-   Si la sección es **Contribuciones**: Describe cómo otros desarrolladores pueden contribuir. Incluye pasos como hacer un fork, crear una rama, hacer un commit y abrir un Pull Request.
+-   Si la sección es **Licencia**: Sugiere una licencia común como MIT y proporciona el texto estándar para ello, mencionando el año actual y el propietario de los derechos de autor (puedes usar un placeholder como \`[Nombre del Propietario]\`).
+
+Genera ahora el contenido para la sección **'{{{sectionName}}}'**.
 `,
 });
 
