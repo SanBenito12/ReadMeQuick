@@ -1,3 +1,4 @@
+
 "use server";
 
 import { determineSections, type DetermineSectionsInput } from '@/ai/flows/determine-sections';
@@ -19,7 +20,7 @@ export async function getSections(input: DetermineSectionsInput) {
   } catch (error) {
     console.error("Error determining sections:", error);
     // Fallback to a default set of sections on error
-    return ["Introduction", "Features", "Technologies", "Installation", "Usage", "License"];
+    return ["Introducción", "Características", "Tecnologías", "Instalación", "Uso", "Licencia"];
   }
 }
 
@@ -59,50 +60,50 @@ export async function generateReadmeContent(data: z.infer<typeof generateReadmeS
     sections.forEach(section => {
         readmeContent += `## ${section}\n\n`;
         switch (section.toLowerCase()) {
-            case 'features':
+            case 'características':
                 const featureList = features.split(',').map(f => f.trim()).filter(f => f);
                 if (featureList.length > 0) {
                     readmeContent += featureList.map(f => `- ${f}`).join('\n') + '\n\n';
                 } else {
-                    readmeContent += 'This project has many exciting features.\n\n';
+                    readmeContent += 'Este proyecto tiene muchas características interesantes.\n\n';
                 }
                 break;
-            case 'technologies':
+            case 'tecnologías':
                  const techList = technologies.split(',').map(t => t.trim()).filter(t => t);
                 if (techList.length > 0) {
-                    readmeContent += `This project is built with the following technologies:\n\n` + techList.map(t => `- ${t}`).join('\n') + '\n\n';
+                    readmeContent += `Este proyecto está construido con las siguientes tecnologías:\n\n` + techList.map(t => `- ${t}`).join('\n') + '\n\n';
                 } else {
-                    readmeContent += 'The project utilizes a modern tech stack.\n\n';
+                    readmeContent += 'El proyecto utiliza una pila de tecnología moderna.\n\n';
                 }
                 break;
-            case 'installation':
-                readmeContent += 'To get a local copy up and running, follow these simple steps.\n\n';
+            case 'instalación':
+                readmeContent += 'Para tener una copia local funcionando, sigue estos sencillos pasos.\n\n';
                 readmeContent += '```bash\n';
-                readmeContent += '# Clone the repository\n';
+                readmeContent += '# Clonar el repositorio\n';
                 readmeContent += `git clone https://github.com/your_username/${projectName.toLowerCase().replace(/\s+/g, '-')}.git\n\n`;
-                readmeContent += '# Install NPM packages\n';
+                readmeContent += '# Instalar paquetes NPM\n';
                 readmeContent += 'npm install\n';
                 readmeContent += '```\n\n';
                 break;
-            case 'usage':
-                readmeContent += 'To use this project, run the following command:\n\n';
+            case 'uso':
+                readmeContent += 'Para usar este proyecto, ejecuta el siguiente comando:\n\n';
                 readmeContent += '```bash\n';
                 readmeContent += 'npm run dev\n';
                 readmeContent += '```\n\n';
                 break;
-            case 'contributing':
-                readmeContent += 'Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.\n\n';
-                readmeContent += '1. Fork the Project\n';
-                readmeContent += '2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)\n';
-                readmeContent += '3. Commit your Changes (`git commit -m \'Add some AmazingFeature\'`)\n';
-                readmeContent += '4. Push to the Branch (`git push origin feature/AmazingFeature`)\n';
-                readmeContent += '5. Open a Pull Request\n\n';
+            case 'contribuciones':
+                readmeContent += 'Las contribuciones son lo que hace a la comunidad de código abierto un lugar tan increíble para aprender, inspirar y crear. Cualquier contribución que hagas es **muy apreciada**.\n\n';
+                readmeContent += '1. Haz un Fork del Proyecto\n';
+                readmeContent += '2. Crea tu Rama de Característica (`git checkout -b feature/AmazingFeature`)\n';
+                readmeContent += '3. Confirma tus Cambios (`git commit -m \'Agrega alguna Característica Increíble\'`)\n';
+                readmeContent += '4. Empuja a la Rama (`git push origin feature/AmazingFeature`)\n';
+                readmeContent += '5. Abre una Pull Request\n\n';
                 break;
-            case 'license':
-                readmeContent += 'Distributed under the MIT License. See `LICENSE` for more information.\n\n';
+            case 'licencia':
+                readmeContent += 'Distribuido bajo la Licencia MIT. Consulta `LICENSE` para más información.\n\n';
                 break;
             default:
-                readmeContent += `*More information about ${section} coming soon...*\n\n`;
+                readmeContent += `*Próximamente más información sobre ${section}...*\n\n`;
                 break;
         }
     });

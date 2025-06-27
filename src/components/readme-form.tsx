@@ -59,7 +59,7 @@ export function ReadmeForm() {
   const handleNextStep = () => {
     if (currentStep === 1) { // After Features & Tech
       if (!formData.projectDescription || !formData.features || !formData.technologies || !formData.projectType) {
-        toast({ title: "Missing Information", description: "Please fill out all fields before proceeding.", variant: "destructive" });
+        toast({ title: "Información Faltante", description: "Por favor, completa todos los campos antes de continuar.", variant: "destructive" });
         return;
       }
       startTransition(async () => {
@@ -69,9 +69,9 @@ export function ReadmeForm() {
           setFormData(prev => ({ ...prev, sections }));
           setCurrentStep(s => s + 1);
         } catch (error) {
-           toast({ title: "AI Error", description: "Could not suggest sections. Please proceed with manual selection.", variant: "destructive" });
-           setSuggestedSections(["Introduction", "Features", "Technologies", "Installation", "Usage", "Contributing", "License"]);
-           setFormData(prev => ({ ...prev, sections: ["Introduction", "Features", "Technologies", "Installation", "Usage", "Contributing", "License"] }));
+           toast({ title: "Error de IA", description: "No se pudieron sugerir secciones. Por favor, procede con la selección manual.", variant: "destructive" });
+           setSuggestedSections(["Introducción", "Características", "Tecnologías", "Instalación", "Uso", "Contribuciones", "Licencia"]);
+           setFormData(prev => ({ ...prev, sections: ["Introducción", "Características", "Tecnologías", "Instalación", "Uso", "Contribuciones", "Licencia"] }));
            setCurrentStep(s => s + 1);
         }
       });
@@ -82,7 +82,7 @@ export function ReadmeForm() {
   
   const handleGenerateReadme = () => {
     if (formData.sections.length === 0) {
-      toast({ title: "No Sections Selected", description: "Please select at least one section for your README.", variant: "destructive" });
+      toast({ title: "No hay secciones seleccionadas", description: "Por favor, selecciona al menos una sección para tu README.", variant: "destructive" });
       return;
     }
     startTransition(async () => {
@@ -91,7 +91,7 @@ export function ReadmeForm() {
         setGeneratedReadme(readme);
         setCurrentStep(s => s + 1);
       } catch (error) {
-        toast({ title: "Generation Error", description: "Failed to generate README. Please try again.", variant: "destructive" });
+        toast({ title: "Error de Generación", description: "No se pudo generar el README. Por favor, inténtalo de nuevo.", variant: "destructive" });
       }
     });
   };
@@ -108,50 +108,50 @@ export function ReadmeForm() {
   const steps = [
     // Step 0: Project Details
     {
-      title: "Project Details",
+      title: "Detalles del Proyecto",
       content: (
         <>
           <div className="flex items-start gap-3">
             {promptIcon}
             <div className="w-full space-y-2">
-              <Label htmlFor="projectName">What's your project's name?</Label>
-              <Input id="projectName" name="projectName" value={formData.projectName} onChange={handleInputChange} placeholder="e.g., ReadMeQuick" />
+              <Label htmlFor="projectName">¿Cuál es el nombre de tu proyecto?</Label>
+              <Input id="projectName" name="projectName" value={formData.projectName} onChange={handleInputChange} placeholder="p. ej., ReadMeQuick" />
             </div>
           </div>
           <div className="flex items-start gap-3">
             {promptIcon}
             <div className="w-full space-y-2">
-              <Label htmlFor="projectType">What type of project is it?</Label>
-              <Input id="projectType" name="projectType" value={formData.projectType} onChange={handleInputChange} placeholder="e.g., Web App, CLI Tool, Library" />
+              <Label htmlFor="projectType">¿Qué tipo de proyecto es?</Label>
+              <Input id="projectType" name="projectType" value={formData.projectType} onChange={handleInputChange} placeholder="p. ej., Aplicación Web, Herramienta CLI, Biblioteca" />
             </div>
           </div>
           <div className="flex items-start gap-3">
             {promptIcon}
             <div className="w-full space-y-2">
-              <Label htmlFor="projectDescription">Describe your project in a sentence or two.</Label>
-              <Textarea id="projectDescription" name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} placeholder="A tool to generate READMEs using AI..." />
+              <Label htmlFor="projectDescription">Describe tu proyecto en una o dos frases.</Label>
+              <Textarea id="projectDescription" name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} placeholder="Una herramienta para generar READMEs usando IA..." />
             </div>
           </div>
         </>
       ),
-      button: <Button onClick={handleNextStep}>Next</Button>
+      button: <Button onClick={handleNextStep}>Siguiente</Button>
     },
     // Step 1: Features & Technologies
     {
-      title: "Features & Technologies",
+      title: "Características y Tecnologías",
       content: (
         <>
           <div className="flex items-start gap-3">
             {promptIcon}
             <div className="w-full space-y-2">
-              <Label htmlFor="features">List the key features (comma-separated).</Label>
-              <Textarea id="features" name="features" value={formData.features} onChange={handleInputChange} placeholder="Interactive CLI, AI-powered suggestions, Badge generation..." />
+              <Label htmlFor="features">Enumera las características clave (separadas por comas).</Label>
+              <Textarea id="features" name="features" value={formData.features} onChange={handleInputChange} placeholder="CLI interactiva, sugerencias con IA, generación de insignias..." />
             </div>
           </div>
           <div className="flex items-start gap-3">
             {promptIcon}
             <div className="w-full space-y-2">
-              <Label htmlFor="technologies">List the main technologies used (comma-separated).</Label>
+              <Label htmlFor="technologies">Enumera las principales tecnologías utilizadas (separadas por comas).</Label>
               <Textarea id="technologies" name="technologies" value={formData.technologies} onChange={handleInputChange} placeholder="Next.js, Tailwind CSS, Genkit..." />
             </div>
           </div>
@@ -160,18 +160,18 @@ export function ReadmeForm() {
       button: (
         <Button onClick={handleNextStep} disabled={isPending}>
           {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
-          Suggest Sections
+          Sugerir Secciones
         </Button>
       )
     },
     // Step 2: Select Sections
     {
-      title: "Select Sections",
+      title: "Seleccionar Secciones",
       content: (
         <div className="flex items-start gap-3">
           {promptIcon}
           <div className="w-full space-y-3">
-            <Label>AI has suggested these sections. Refine as needed.</Label>
+            <Label>La IA ha sugerido estas secciones. Ajústalas según sea necesario.</Label>
             <div className="grid grid-cols-2 gap-4 rounded-md border p-4 sm:grid-cols-3">
               {suggestedSections.map((section) => (
                 <div key={section} className="flex items-center gap-2">
@@ -190,15 +190,15 @@ export function ReadmeForm() {
        button: (
         <Button onClick={handleGenerateReadme} disabled={isPending}>
           {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
-          Generate README
+          Generar README
         </Button>
       )
     },
     // Step 3: Preview
     {
-      title: "README Preview",
+      title: "Vista Previa del README",
       content: <ReadmePreview content={generatedReadme} />,
-      button: <Button onClick={handleStartOver} variant="outline">Start Over</Button>
+      button: <Button onClick={handleStartOver} variant="outline">Empezar de Nuevo</Button>
     }
   ];
 
@@ -217,7 +217,7 @@ export function ReadmeForm() {
             {isPending && currentStep !== 2 && currentStep !== 3 ? (
                <div className="flex flex-col items-center justify-center gap-4 py-16">
                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                 <p className="text-muted-foreground">AI is thinking...</p>
+                 <p className="text-muted-foreground">La IA está pensando...</p>
                </div>
             ) : (
               <>

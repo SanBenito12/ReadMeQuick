@@ -1,3 +1,4 @@
+
 // use server'
 'use server';
 
@@ -21,7 +22,7 @@ const DetermineSectionsInputSchema = z.object({
 export type DetermineSectionsInput = z.infer<typeof DetermineSectionsInputSchema>;
 
 const DetermineSectionsOutputSchema = z.object({
-  sections: z.array(z.string()).describe('An array of section names to include in the README file (e.g., ["Introduction", "Installation", "Usage"]).'),
+  sections: z.array(z.string()).describe('An array of section names to include in the README file (e.g., ["Introducción", "Instalación", "Uso"]).'),
 });
 export type DetermineSectionsOutput = z.infer<typeof DetermineSectionsOutputSchema>;
 
@@ -33,16 +34,16 @@ const prompt = ai.definePrompt({
   name: 'determineSectionsPrompt',
   input: {schema: DetermineSectionsInputSchema},
   output: {schema: DetermineSectionsOutputSchema},
-  prompt: `Based on the project details below, determine the appropriate sections to include in the README file.
+  prompt: `Basado en los detalles del proyecto a continuación, determina las secciones apropiadas para incluir en el archivo README.
 
 Project Type: {{{projectType}}}
 Project Description: {{{projectDescription}}}
 Key Features: {{{features}}}
 Technologies Used: {{{technologies}}}
 
-Consider common sections like Introduction, Installation, Usage, Contributing, License, and any other relevant sections based on the project details.
+Considera secciones comunes como Introducción, Instalación, Uso, Contribuciones, Licencia y cualquier otra sección relevante basada en los detalles del proyecto.
 
-Return a JSON array of strings representing the section names. Example: ["Introduction", "Installation", "Usage", "Contributing", "License"]
+Devuelve un array JSON de cadenas que representen los nombres de las secciones. Ejemplo: ["Introducción", "Instalación", "Uso", "Contribuciones", "Licencia"]
 `,
 });
 

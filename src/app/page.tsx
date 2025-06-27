@@ -13,7 +13,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="max-w-2xl text-muted-foreground sm:text-lg">
-            Generate professional README files for your projects in seconds. Just answer a few questions and let AI do the heavy lifting.
+            Genera archivos README profesionales para tus proyectos en segundos. Solo responde algunas preguntas y deja que la IA haga el trabajo pesado.
           </p>
         </header>
         <ReadmeForm />

@@ -17,7 +17,7 @@ export function ReadmePreview({ content }: ReadmePreviewProps) {
   const handleCopy = () => {
     navigator.clipboard.writeText(content);
     setCopied(true);
-    toast({ title: "Copied!", description: "README content copied to clipboard." });
+    toast({ title: "¡Copiado!", description: "El contenido del README ha sido copiado al portapapeles." });
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -31,7 +31,7 @@ export function ReadmePreview({ content }: ReadmePreviewProps) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast({ title: "Downloaded!", description: "README.md has been downloaded." });
+    toast({ title: "¡Descargado!", description: "README.md ha sido descargado." });
   };
 
   return (
@@ -40,11 +40,11 @@ export function ReadmePreview({ content }: ReadmePreviewProps) {
         <div className="absolute top-2 right-2 flex gap-2">
            <Button variant="ghost" size="icon" onClick={handleCopy}>
             {copied ? <Check className="h-4 w-4 text-green-500" /> : <Clipboard className="h-4 w-4" />}
-            <span className="sr-only">Copy</span>
+            <span className="sr-only">Copiar</span>
           </Button>
           <Button variant="ghost" size="icon" onClick={handleDownload}>
             <Download className="h-4 w-4" />
-            <span className="sr-only">Download</span>
+            <span className="sr-only">Descargar</span>
           </Button>
         </div>
         <ScrollArea className="h-[400px] w-full rounded-md border bg-muted/50 p-4">
