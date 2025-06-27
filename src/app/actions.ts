@@ -36,12 +36,12 @@ const generateReadmeSchema = z.object({
 
 export async function generateReadmeStructure(data: z.infer<typeof generateReadmeSchema>) {
     const parsedData = generateReadmeSchema.parse(data);
-    const { projectName, projectDescription, features, technologies, sections } = parsedData;
+    const { projectName, projectDescription, projectType, features, technologies, sections } = parsedData;
 
     let badges: string[] = [];
     try {
         const badgesResult = await generateBadges({
-            projectDescription: `Project Type: ${parsedData.projectType}. Features: ${features}. Technologies: ${technologies}. Description: ${projectDescription}`,
+            projectDescription: `Project Type: ${projectType}. Features: ${features}. Technologies: ${technologies}. Description: ${projectDescription}`,
         });
         if (badgesResult && badgesResult.badges) {
             badges = badgesResult.badges;

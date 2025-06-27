@@ -33,14 +33,14 @@ const prompt = ai.definePrompt({
   name: 'generateBadgesPrompt',
   input: {schema: GenerateBadgesInputSchema},
   output: {schema: GenerateBadgesOutputSchema},
-  prompt: `You are an expert software developer specializing in generating badges for projects.
+  prompt: `Eres un experto desarrollador de software especializado en generar insignias (badges) para proyectos.
 
-You will use the project description to determine relevant badges for the project.
-These badges should showcase the project's key features and technologies.
+Utilizarás la descripción del proyecto para determinar las insignias relevantes para el proyecto.
+Estas insignias deben mostrar las características y tecnologías clave del proyecto.
 
-Return an array of markdown strings representing the badges.
+Devuelve un array de cadenas de markdown que representen las insignias.
 
-Project Description: {{{projectDescription}}}`,
+Descripción del Proyecto: {{{projectDescription}}}`,
 });
 
 const generateBadgesFlow = ai.defineFlow(
