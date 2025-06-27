@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { ChevronRight, Loader2, Sparkles, Wand2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { getSections, generateReadmeContent } from "@/app/actions";
+import { getSections, generateReadmeStructure } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -87,11 +87,11 @@ export function ReadmeForm() {
     }
     startTransition(async () => {
       try {
-        const readme = await generateReadmeContent(formData);
+        const readme = await generateReadmeStructure(formData);
         setGeneratedReadme(readme);
         setCurrentStep(s => s + 1);
       } catch (error) {
-        toast({ title: "Error de Generación", description: "No se pudo generar el README. Por favor, inténtalo de nuevo.", variant: "destructive" });
+        toast({ title: "Error de Generación", description: "No se pudo generar la estructura del README. Por favor, inténtalo de nuevo.", variant: "destructive" });
       }
     });
   };
@@ -190,14 +190,14 @@ export function ReadmeForm() {
        button: (
         <Button onClick={handleGenerateReadme} disabled={isPending}>
           {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
-          Generar README
+          Generar Estructura README
         </Button>
       )
     },
     // Step 3: Preview
     {
-      title: "Vista Previa del README",
-      content: <ReadmePreview content={generatedReadme} />,
+      title: "README Interactivo",
+      content: <ReadmePreview content={generatedReadme} projectData={formData} />,
       button: <Button onClick={handleStartOver} variant="outline">Empezar de Nuevo</Button>
     }
   ];
